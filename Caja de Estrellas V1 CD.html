@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf1e4">
+<title>Caja de Estrellas</title>
+<style>
+:root{--bg:#fbf1e4;--ink:#3a3040;--card:#fffaf2;--a:#86c5b0;--b:#f4bf8a;--c:#b7a6dc;--ok:#9bd19b;--soft:#eadcc6;--sat:.9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2b2533;--ink:#f6ecdd;--card:#3b3345;--soft:#4f4560}}
+:root[data-theme="dark"]{--bg:#2b2533;--ink:#f6ecdd;--card:#3b3345;--soft:#4f4560}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:clamp(17px,2.4vw,21px)/1.4 system-ui,sans-serif;filter:saturate(var(--sat))}
+body.dys{font-family:"Trebuchet MS","Comic Sans MS",Verdana,sans-serif;letter-spacing:.04em;line-height:1.7}
+main{max-width:900px;margin:auto;padding:10px 14px 30px}
+h2{font-size:clamp(1.2rem,4vw,1.8rem);margin:.4em 0}
+button{min-height:56px;min-width:56px;font:inherit;color:var(--ink);background:var(--card);border:3px solid var(--ink);border-radius:18px;padding:8px 16px;cursor:pointer;touch-action:manipulation}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:4px solid #5b7fd6;outline-offset:2px}
+button.p{background:var(--a)}button.s{background:var(--b)}button.ok{background:var(--ok)}
+.bar{display:flex;gap:8px;align-items:center;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;flex-wrap:wrap}.sp{flex:1}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin:10px 0}
+.card{background:var(--card);border:3px solid var(--soft);border-radius:24px;padding:14px;text-align:center}
+.big{font-size:clamp(2rem,9vw,3.4rem);font-weight:700;text-align:center}
+.ag{display:flex;gap:8px;list-style:none;padding:0;flex-wrap:wrap}.ag li{flex:1;min-width:70px;padding:8px;border-radius:14px;background:var(--soft);text-align:center}
+.ag .cur{background:var(--b)}.ag .dn{background:var(--ok)}
+svg{max-width:100%;height:auto}.node{cursor:pointer}
+.ov{position:fixed;inset:0;background:rgba(40,30,50,.6);display:grid;place-items:center;padding:16px;z-index:20}.ov .card{max-width:420px}
+.tg{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:16px 0}.blk{min-width:90px;min-height:90px;font-size:1.8rem;background:var(--c)}
+.mv{animation:dr var(--sp) ease-in-out infinite alternate}.pz{animation-play-state:paused}
+@keyframes dr{from{transform:translateX(-30px)}to{transform:translateX(30px)}}
+.pop{animation:pop .4s}@keyframes pop{50%{transform:scale(1.1)}}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.calm *,.calm{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.alb{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+input[type=range]{width:100%;min-height:48px}
+:root{--s1:#bfe6f2;--s2:#e6f5ea}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--s1:#3a3560;--s2:#2f2b46}}
+:root[data-theme="dark"]{--s1:#3a3560;--s2:#2f2b46}
+body{background:linear-gradient(180deg,var(--s1) 0,var(--s2) 45%,var(--bg) 100%) fixed;font-family:ui-rounded,"Nunito","Trebuchet MS","Segoe UI",system-ui,sans-serif;font-weight:600}
+button{border:0;border-radius:20px;background:linear-gradient(color-mix(in srgb,var(--card),#fff 25%),var(--card));box-shadow:0 5px 0 rgba(58,48,64,.28),0 9px 14px rgba(58,48,64,.18);transition:transform .08s,box-shadow .08s;font-weight:800}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(58,48,64,.28)}
+button.p{background:linear-gradient(#a9e0cb,#6fb9a0);color:#16332b}
+button.s{background:linear-gradient(#ffd9a8,#f0a964);color:#4a2c0c}
+button.ok{background:linear-gradient(#b9ecb9,#7cc47c);color:#173a17}
+.card{border:0;background:linear-gradient(color-mix(in srgb,var(--card),#fff 22%),var(--card));box-shadow:0 8px 0 rgba(58,48,64,.12),0 16px 28px rgba(58,48,64,.16);border-radius:28px}
+.bar{background:color-mix(in srgb,var(--s1),transparent 15%);backdrop-filter:blur(8px);border-radius:0 0 24px 24px;padding:8px 10px;box-shadow:0 6px 16px rgba(58,48,64,.12)}
+.blk{border-radius:28px;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.7),transparent 42%),linear-gradient(#cbbbee,#9b84cf);color:#2a1d4a;font-size:2rem;box-shadow:0 8px 0 #7a63b0,0 14px 18px rgba(0,0,0,.2)}
+.ag li{border-radius:999px;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.fl{animation:fl 3.2s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-6px)}}
+.cld{animation:cd 30s ease-in-out infinite alternate}@keyframes cd{to{transform:translateX(40px)}}
+.sk{position:fixed;font-style:normal;pointer-events:none;z-index:30;animation:sk .9s ease-out forwards}
+@keyframes sk{from{transform:translate(0,0) scale(.4);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(1.2);opacity:0}}
+</style></head><body><main id="app"></main>
+<script>
+"use strict";
+const K="cajaEstrellas1",$=s=>document.querySelector(s),A=$("#app"),NS="http://www.w3.org/2000/svg";
+let D={prof:"eq",mute:false,vm:.5,vf:.8,speak:false,dys:false,speed:0,done:{},album:[],facts:{},ch:0,day:""};
+try{Object.assign(D,JSON.parse(localStorage.getItem(K)||"{}"))}catch(e){}
+const sv=()=>{try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}};
+if(D.day!==new Date().toDateString()){D.day=new Date().toDateString();D.ch=0;sv()}
+const TB=[1,2,10]; /* tabla de cada mundo activo: x1 (identidad), x2 (doble), x10 (un cero) */
+const M=[["bars","link"],["bars","shoot"],["shoot","link"]]; /* mecánicas por mundo */
+const PN={bajo:"🌙 Bajo estímulo",eq:"☀️ Equilibrado",en:"⚡ Energía controlada"};
+
+/* ===== audio: síntesis pentatónica, volumen bajo, música en capas por progreso ===== */
+let X=null;const PE=[0,2,4,7,9];
+function ini(){if(!X){try{X=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(X&&X.state==="suspended")X.resume()}
+const pm=()=>({bajo:.4,eq:1,en:1.3}[D.prof]);
+function tn(f,t,ty,dl,ch){if(!X||D.mute)return;const v=.08*pm()*(ch==="m"?D.vm:D.vf);if(v<=0)return;
+ const o=X.createOscillator(),g=X.createGain(),n=X.currentTime+(dl||0);o.type=ty||"sine";o.frequency.value=f;
+ g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+t);o.connect(g).connect(X.destination);o.start(n);o.stop(n+t)}
+const nt=(i,o)=>262*Math.pow(2,(PE[i%5]+12*(o+Math.floor(i/5)))/12);
+const fx={pop(){tn(nt(2,0),.12,"triangle")},good(){[0,2,4].forEach((k,i)=>tn(nt(k+2,0),.3,"triangle",i*.1))},
+ bad(){tn(220,.2);tn(196,.25,"sine",.12)},star(){[4,6,7,9].forEach((k,i)=>tn(nt(k,0),.35,"triangle",i*.12))}};
+setInterval(()=>{if(!X||D.mute||document.hidden)return;const L=Math.min(3,1+Object.keys(D.done).length);
+ for(let l=0;l<L;l++)tn(nt(Math.random()*5|0,l-1),2,"sine",l*.4,"m")},3000);
+const say=t=>{if(D.speak&&window.speechSynthesis){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="es-ES";speechSynthesis.speak(u)}};
+
+/* ===== settings: perfiles sensoriales ===== */
+function apply(){document.body.className=(D.prof==="bajo"?"calm ":"")+(D.dys?"dys":"");
+ document.documentElement.style.setProperty("--sat",{bajo:.6,eq:.9,en:1.1}[D.prof])}
+const h=x=>{A.innerHTML=x;window.scrollTo(0,0)};
+const tools=()=>`<button onclick="tg('mute')" aria-pressed="${D.mute}" aria-label="Sonido">${D.mute?"🔇":"🔊"}</button>
+<button onclick="tg('prof')" aria-label="Perfil sensorial">${PN[D.prof]}</button><button onclick="album()" aria-label="Álbum">📖</button>
+<button aria-label="Ajustes de adulto, mantén pulsado" onpointerdown="gs()" onpointerup="ge()" onpointerleave="ge()" onkeydown="if(event.key==='Enter')adult()">⚙️</button>`;
+const bar=l=>`<div class="bar">${l}<span class="sp"></span>${tools()}</div>`;
+let gt=0;const gs=()=>{gt=setTimeout(adult,900)},ge=()=>clearTimeout(gt);
+function tg(k){ini();if(k==="mute")D.mute=!D.mute;else{const o=["bajo","eq","en"];D.prof=o[(o.indexOf(D.prof)+1)%3]}sv();apply();cur()}
+let cur=()=>home();
+
+/* ===== adapt: elección silenciosa de factores según fallos (D.facts) ===== */
+function pf(t){const w=[];for(let f=1;f<=10;f++){const m=D.facts[t+"x"+f]||{o:0,b:0};w.push(...Array(1+m.b*2+(m.o<2?1:0)).fill(f))}return w[Math.random()*w.length|0]}
+function rec(t,f,ok){const m=D.facts[t+"x"+f]||(D.facts[t+"x"+f]={o:0,b:0});ok?m.o++:m.b++;sv()}
+const shf=a=>a.sort(()=>Math.random()-.5);
+function opts(t,f){const p=t*f,s=new Set([p]);[p+t,p-t,p+1,p-1,p+2].forEach(v=>{if(v>0&&s.size<3)s.add(v)});return shf([...s])}
+
+/* ===== estrategia visual mostrada tras cada fallo ===== */
+function strat(t,f){let s;if(t===10)s=`×10 añade un cero: ${f} × 10 = ${f*10}`;
+ else if(t===2||f===2){const n=t===2?f:t;s=`Es el doble: ${n} + ${n} = ${t*f}`}
+ else s=`${f} grupos de ${t}: ${Array(f).fill(t).join(" + ")} = ${t*f}`;
+ const r=Array.from({length:f},(_,i)=>`<rect x="0" y="${i*12}" width="${t*14}" height="10" rx="5" fill="hsl(${t*37},55%,65%)"/>`).join("");
+ return `<p>${s}</p><svg viewBox="0 0 ${t*14} ${f*12}" width="${Math.min(150,t*14)}" role="img"><title>${f} barras de ${t}</title><desc>Cada barra vale ${t}</desc>${r}</svg>`}
+function bad(t,f){fx.bad();rec(t,f,0);const o=document.createElement("div");o.className="ov";o.setAttribute("role","dialog");
+ o.innerHTML=`<div class="card"><h2>Casi. Mira cómo se resuelve:</h2>${strat(t,f)}<button class="p" id="rt">Intentar de nuevo</button></div>`;
+ document.body.appendChild(o);$("#rt").focus();$("#rt").onclick=()=>o.remove()}
+const good=(t,f,b)=>{fx.good();rec(t,f,1);if(b)b.classList.add("ok","pop");spark(b)};
+/* destellos: solo en perfiles Equilibrado y Energía; nunca con Bajo estímulo ni reduced-motion */
+function spark(b){if(D.prof==="bajo"||matchMedia("(prefers-reduced-motion:reduce)").matches)return;const r=b?b.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0},n=D.prof==="en"?14:8;
+ for(let k=0;k<n;k++){const e=document.createElement("i"),a=k/n*6.28,d=60+Math.random()*50;e.className="sk";e.textContent=["⭐","✨","💫"][k%3];
+  e.style.cssText=`left:${r.left+r.width/2}px;top:${r.top+r.height/2}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px`;document.body.appendChild(e);setTimeout(()=>e.remove(),900)}}
+
+/* ===== character: criaturas-regleta originales ===== */
+function cr(i,lock,sz){const hu=i*47%360,hh=50+(i%4)*10,w=36+(i%5)*4;
+ return `<svg class="fl" style="animation-delay:${(i%6)*.4}s" width="${sz||90}" viewBox="0 0 60 80" role="img"><title>${lock?"Criatura por descubrir":"Criatura "+(i+1)}</title>
+ <defs><linearGradient id="cg${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="hsl(${hu},75%,84%)"/><stop offset="1" stop-color="hsl(${hu},55%,60%)"/></linearGradient></defs><ellipse cx="30" cy="77" rx="${w/2+4}" ry="3.5" fill="#000" opacity=".18"/><line x1="30" y1="${75-hh}" x2="30" y2="${75-hh-7}" stroke="${lock?"#9a92a3":`hsl(${hu},55%,55%)`}" stroke-width="2" opacity="${lock?.35:1}"/><circle cx="30" cy="${75-hh-8}" r="3.5" fill="${lock?"#9a92a3":`hsl(${hu},80%,65%)`}" opacity="${lock?.35:1}"/><rect x="${30-w/2}" y="${75-hh}" width="${w}" height="${hh}" rx="17" fill="${lock?"#9a92a3":`url(#cg${i})`}" opacity="${lock?.35:1}"/>${lock?"":`<ellipse cx="30" cy="${75-hh+hh*.72}" rx="${w/3}" ry="${hh/6}" fill="#fff" opacity=".35"/><ellipse cx="${30-w/4}" cy="${75-hh+7}" rx="5" ry="2.5" fill="#fff" opacity=".55"/>`}
+ ${lock?"":`<circle cx="23" cy="${75-hh+20}" r="4.6" fill="#fff"/><circle cx="37" cy="${75-hh+20}" r="4.6" fill="#fff"/><circle cx="24" cy="${75-hh+21}" r="2.8" fill="#3a3040"/><circle cx="36" cy="${75-hh+21}" r="2.8" fill="#3a3040"/><circle cx="25" cy="${75-hh+19.8}" r="1" fill="#fff"/><circle cx="37" cy="${75-hh+19.8}" r="1" fill="#fff"/><circle cx="16" cy="${75-hh+28}" r="3" fill="#ff8fa3" opacity=".55"/><circle cx="44" cy="${75-hh+28}" r="3" fill="#ff8fa3" opacity=".55"/><path d="M24 ${75-hh+28} Q30 ${75-hh+34} 36 ${75-hh+28}" stroke="#3a3040" stroke-width="2.5" fill="none"/>`}</svg>`}
+
+/* ===== map: hub con 20 mundos (3 activos) ===== */
+function home(){cur=home;const n=Math.min(D.ch,3);let p="",nd="";
+ for(let i=0;i<20;i++){const r=i/4|0,c=i%4,x=(r%2?3-c:c)*90+45,y=r*90+45,on=i<3&&(i===0||(D.done[i-1]||0)>=1),dn=(D.done[i]||0)>=4;
+  p+=(i?"L":"M")+x+" "+y;
+  nd+=`<g class="node" ${on?`tabindex="0" role="button" onclick="world(${i})" onkeydown="if(event.key==='Enter')world(${i})"`:`opacity=".45" aria-hidden="true"`}>
+  <ellipse cx="${x}" cy="${y+30}" rx="26" ry="7" fill="#000" opacity=".18"/><circle cx="${x}" cy="${y}" r="28" fill="${dn?"#f7cf5c":on?"#6fcfae":"#cfc4b4"}" stroke="#fff" stroke-width="4"/><ellipse cx="${x-8}" cy="${y-13}" rx="12" ry="6" fill="#fff" opacity=".5"/>
+  <text x="${x}" y="${y+7}" text-anchor="middle" font-size="20" fill="#3a3040">${dn?"🌸":on?i+1:"🔒"}</text></g>`}
+ h(bar(`<b style="font-size:1.5rem;background:linear-gradient(90deg,#e8963f,#8f74d4);-webkit-background-clip:text;background-clip:text;color:transparent">⭐ Caja de Estrellas</b>`)+`<p>Hoy: ${[0,1,2].map(i=>i<n?"●":"○").join(" ")} ${D.ch>=3?"Meta de hoy cumplida":"3 retos"}</p>
+ <div class="card" style="padding:0;overflow:hidden"><svg viewBox="0 0 360 450" role="img"><title>Mapa de 20 mundos</title><desc>Camino serpenteante. Los mundos 1 a 3 están abiertos; el resto, próximamente</desc>
+ <defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd8ee"/><stop offset="1" stop-color="#e9f6ee"/></linearGradient></defs><rect width="360" height="450" fill="url(#sk)"/><circle cx="312" cy="34" r="40" fill="#ffe08a" opacity=".3"/><circle cx="312" cy="34" r="26" fill="#ffe08a"/><g class="cld" fill="#fff" opacity=".9"><ellipse cx="60" cy="30" rx="30" ry="11"/><ellipse cx="80" cy="22" rx="20" ry="11"/></g><g class="cld" fill="#fff" opacity=".8"><ellipse cx="200" cy="60" rx="26" ry="9"/><ellipse cx="216" cy="54" rx="16" ry="9"/></g><path d="M0 300 Q90 240 180 290 T360 270 V450 H0Z" fill="#c8e6b8"/><path d="M0 380 Q120 330 240 375 T360 360 V450 H0Z" fill="#a9d99a"/><g fill="#7bbf7a"><circle cx="330" cy="250" r="14"/><circle cx="20" cy="340" r="16"/><circle cx="340" cy="420" r="18"/></g><g fill="#8a5a3c"><rect x="328" y="258" width="4" height="14"/><rect x="18" y="350" width="4" height="14"/><rect x="338" y="430" width="4" height="14"/></g><path d="${p}" fill="none" stroke="#c9a46a" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/><path d="${p}" fill="none" stroke="#f3dcae" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><path d="${p}" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>${nd}</svg></div><p>Mundos 4 a 20: próximamente.</p>`)}
+
+/* ===== world: agenda fija Descubrir → Juego 1 → Juego 2 → Guardián ===== */
+function world(w){ini();cur=()=>world(w);const t=TB[w],p=D.done[w]||0,nm=["Descubrir","Juego 1","Juego 2","Guardián"];
+ h(bar(`<button onclick="home()" aria-label="Volver al mapa">←</button><b>Mundo ${w+1} · tabla del ${t}</b>`)+
+ `<ol class="ag">${nm.map((n,i)=>`<li class="${i<p?"dn":i===p?"cur":""}">${n}</li>`).join("")}</ol>`+
+ (p>=4?`<div class="card"><h2>Mundo completado</h2>${cr(w,0,120)}</div><div class="row"><button onclick="album()">Ver álbum</button><button onclick="run(${w},0)">Repetir descubrir</button></div>`
+ :`<div class="row"><button class="p big" onclick="run(${w},${p})">${p?"Seguir":"Empezar"}: ${nm[p]}</button></div>`))}
+function run(w,s){ini();s===0?disc(w):play(w,s)}
+function fin(w,s){D.done[w]=Math.max(D.done[w]||0,s+1);if(s>0)D.ch++;if(s===3&&!D.album.includes(w))D.album.push(w);sv();fx.star();
+ const last=s===3,cl=s>0&&D.ch%3===0;
+ h(bar(`<b>¡Bien hecho!</b>`)+`<div class="card">${last?`<h2>Nueva criatura</h2>${cr(w,0,140)}`:`<h2>Paso completado</h2>`}</div>
+ <div class="row">${cl?`<button class="p" onclick="close_()">Continuar</button>`:`<button class="p" onclick="world(${w})">Continuar</button>`}</div>`)}
+function close_(){h(bar(`<b>Fin de sesión</b>`)+`<div class="card"><h2>Hoy hiciste 3 retos ● ● ●</h2><p>Es un buen momento para descansar.</p></div>
+ <div class="row"><button class="p" onclick="home()">Volver al mapa</button><button onclick="world(${W})">Seguir jugando</button></div>`)}
+let W=0;
+
+/* ===== shop: Descubrir. Balanza: f grupos de t a la izquierda; el niño añade grupos hasta equilibrar ===== */
+function disc(w){W=w;const t=TB[w],fs=[2,3,5];let i=0;
+ (function go(){if(i>=3)return fin(w,0);const f=fs[i];let n=0;
+  const bars=(k,x)=>Array.from({length:k},(_,j)=>`<rect x="${x}" y="${50+j*11}" width="${t*6}" height="9" rx="4" fill="hsl(${t*37},55%,65%)"/>`).join("");
+  const dr=()=>{const ang=Math.max(-12,Math.min(12,(n-f)*4)),eq=n===f;
+   h(bar(`<button onclick="world(${w})" aria-label="Volver">←</button><b>Descubrir ${i+1}/3</b>`)+
+   `<p>Añade grupos de ${t} a la derecha hasta que la balanza se equilibre.</p>
+   <div class="card"><svg viewBox="0 0 300 150" role="img"><title>Balanza</title><desc>Izquierda ${f} grupos de ${t}; derecha ${n} grupos</desc>
+   <g transform="rotate(${ang} 150 40)"><line x1="30" y1="40" x2="270" y2="40" stroke="#3a3040" stroke-width="5" stroke-linecap="round"/>${bars(f,50)}${bars(n,190)}</g>
+   <polygon points="140,140 160,140 150,40" fill="#b7a6dc"/></svg></div>
+   <div class="row"><button id="m" aria-label="Quitar un grupo">−</button><b>${n} grupos</b><button class="s" id="a">+ grupo de ${t}</button></div>
+   ${eq?`<div class="card ok"><div class="big">${f} × ${t} = ${f*t}</div><button class="p" id="nx">Siguiente</button></div>`:""}`);
+   $("#a").onclick=()=>{fx.pop();n++;dr()};$("#m").onclick=()=>{if(n>0)n--;fx.pop();dr()};
+   if(eq){fx.good();say(`${f} por ${t} igual a ${f*t}`);$("#nx").onclick=()=>{i++;go()}}};dr()})()}
+
+/* ===== battle/minigames: 4 mecánicas, sin cronómetro ===== */
+function scr(w,title,body){h(bar(`<button onclick="world(${w})" aria-label="Salir">←</button><b>${title}</b>`)+body)}
+const MK={
+ /* 1) Barras y fusión: apilar f barras de valor t y ver el producto crecer (suma repetida) */
+ bars(w,t,f,i,N,dn){let n=0;const dr=()=>{const u=280/(10*t),r=Array.from({length:n},(_,j)=>`<rect x="${j*t*u}" y="0" width="${t*u-2}" height="40" rx="8" fill="hsl(${t*37+j*8},55%,${60+j%2*8}%)"/>`).join("");
+  scr(w,`Barras ${i}/${N}`,`<div class="big">${f} barras de ${t}</div><div class="card"><svg viewBox="0 0 300 46" role="img"><title>Barras apiladas</title>${r}</svg><b>${n} barras = ${n*t}</b></div>
+  <div class="row"><button id="m">−</button><button class="s" id="a">+ barra de ${t}</button></div><div class="row"><button class="p" id="ok">Listo</button></div>`);
+  $("#a").onclick=()=>{if(n<12){fx.pop();n++;dr()}};$("#m").onclick=()=>{if(n>0){n--;fx.pop();dr()}};
+  $("#ok").onclick=()=>{if(n===f){good(t,f,$("#ok"));dn()}else bad(t,f)}};dr();say(`${f} barras de ${t}`)},
+ /* 2) Tiro al blanco sin presión: velocidad 0 por defecto, ajustable por el adulto */
+ shoot(w,t,f,i,N,dn){const o=opts(t,f);scr(w,`Tiro al blanco ${i}/${N}`,`<div class="big">${t} × ${f}</div>
+  <div class="tg ${D.speed?"mv":""}" id="tg" style="--sp:${D.speed?(8/D.speed):0}s">${o.map(v=>`<button class="blk" data-v="${v}" aria-label="Disparar a ${v}">${v}</button>`).join("")}</div>
+  <div class="row"><button id="ps">⏸ Pausa</button></div>`);say(`${t} por ${f}`);
+  $("#ps").onclick=()=>$("#tg").classList.toggle("pz");
+  document.querySelectorAll(".blk").forEach(b=>b.onclick=()=>{if(+b.dataset.v===t*f){good(t,f,b);dn()}else bad(t,f)})},
+ /* 3) Conexión por trazo: unir cada operación con su producto arrastrando */
+ link(w,t,_,i,N,dn){const fs=[];while(fs.length<3){const f=pf(t);if(!fs.includes(f))fs.push(f)}const ps=shf(fs.map(f=>t*f));
+  scr(w,`Conectar ${i}/${N}`,`<p>Arrastra desde cada operación hasta su resultado.</p><div class="card"><svg id="lk" viewBox="0 0 360 240" style="touch-action:none" role="img"><title>Conectar operaciones</title>
+  ${fs.map((f,k)=>`<g data-k="${k}"><rect x="20" y="${15+k*80}" width="90" height="50" rx="14" fill="#f4bf8a"/><text x="65" y="${47+k*80}" text-anchor="middle" font-size="22" fill="#3a3040">${t}×${f}</text></g>`).join("")}
+  ${ps.map((v,k)=>`<g data-p="${v}" data-y="${k}"><rect x="250" y="${15+k*80}" width="90" height="50" rx="14" fill="#b7a6dc"/><text x="295" y="${47+k*80}" text-anchor="middle" font-size="22" fill="#3a3040">${v}</text></g>`).join("")}</svg></div>`);
+  const s=$("#lk");let c=null,ln=null,ok=0;const pt=e=>{const r=s.getBoundingClientRect();return[(e.clientX-r.left)*360/r.width,(e.clientY-r.top)*240/r.height]};
+  s.onpointerdown=e=>{const g=e.target.closest("[data-k]");if(!g||g.dataset.d)return;c=g;s.setPointerCapture(e.pointerId);
+   ln=document.createElementNS(NS,"line");ln.setAttribute("x1",110);ln.setAttribute("y1",40+g.dataset.k*80);ln.setAttribute("x2",110);ln.setAttribute("y2",40+g.dataset.k*80);
+   ln.setAttribute("stroke","#3a3040");ln.setAttribute("stroke-width",6);ln.setAttribute("stroke-linecap","round");s.appendChild(ln)};
+  s.onpointermove=e=>{if(!ln)return;const[x,y]=pt(e);ln.setAttribute("x2",x);ln.setAttribute("y2",y)};
+  s.onpointerup=e=>{if(!ln)return;const g=document.elementFromPoint(e.clientX,e.clientY),r=g&&g.closest("[data-p]"),k=+c.dataset.k;
+   if(r&&+r.dataset.p===t*fs[k]){ln.setAttribute("x2",250);ln.setAttribute("y2",40+r.dataset.y*80);c.dataset.d=1;good(t,fs[k]);if(++ok===3)dn()}
+   else{ln.remove();bad(t,fs[k])}ln=null;c=null};say(`Conecta las operaciones de la tabla del ${t}`)},
+ /* 4) Guardián: racha de aciertos sin reloj; el fallo muestra la estrategia y repite la misma operación */
+ boss(w,t,f,i,N,dn){scr(w,`Guardián ${i}/${N}`,`<div class="card"><svg class="fl" viewBox="0 0 60 80" width="120" role="img"><title>Guardián amistoso</title><ellipse cx="30" cy="76" rx="20" ry="3.5" fill="#000" opacity=".18"/><circle cx="13" cy="20" r="6" fill="#a58de0"/><circle cx="47" cy="20" r="6" fill="#a58de0"/><ellipse cx="30" cy="45" rx="24" ry="28" fill="#b9a2e6"/><ellipse cx="22" cy="29" rx="9" ry="5" fill="#fff" opacity=".4"/><ellipse cx="30" cy="56" rx="13" ry="8" fill="#fff" opacity=".25"/><circle cx="21" cy="40" r="4" fill="#3a3040"/><circle cx="39" cy="40" r="4" fill="#3a3040"/><path d="M22 55 Q30 61 38 55" stroke="#3a3040" stroke-width="3" fill="none"/></svg>
+  <div class="big">${t} × ${f} = ?</div><p>Racha: ${i-1} de ${N}</p></div><div class="row">${opts(t,f).map(v=>`<button class="blk" data-v="${v}">${v}</button>`).join("")}</div>`);say(`${t} por ${f}`);
+  document.querySelectorAll(".blk").forEach(b=>b.onclick=()=>{if(+b.dataset.v===t*f){good(t,f,b);dn()}else bad(t,f)})}};
+function play(w,s){W=w;const t=TB[w],k=s===3?"boss":M[w][s-1],N=s===3?6:3;let i=0;
+ (function nx(){if(i>=N)return fin(w,s);const f=pf(t);i++;MK[k](w,t,f,i,N,()=>setTimeout(nx,700))})()}
+
+/* ===== álbum ===== */
+function album(){cur=album;h(bar(`<button onclick="home()" aria-label="Volver">←</button><b>Álbum (${D.album.length}/20)</b>`)+
+ `<div class="alb">${Array.from({length:20},(_,i)=>`<div class="card">${cr(i,!D.album.includes(i),80)}</div>`).join("")}</div>`)}
+
+/* ===== panel de adulto (mantener pulsado ⚙) ===== */
+function adult(){ge();const rep=TB.map((t,w)=>{let o=0,b=0;for(let f=1;f<=10;f++){const m=D.facts[t+"x"+f];if(m){o+=m.o;b+=m.b}}return `<li>Tabla del ${t}: ${o+b?Math.round(100*o/(o+b))+"% de aciertos":"sin datos"}</li>`}).join("");
+ cur=adult;h(bar(`<button onclick="home()" aria-label="Volver">←</button><b>Panel de adulto</b>`)+
+ `<div class="card" style="text-align:left"><h2>Tiro al blanco: velocidad</h2><div class="row">${[0,.5,1,2].map(v=>`<button class="${D.speed===v?"p":""}" onclick="D.speed=${v};sv();adult()">${v?v+"×":"Estático"}</button>`).join("")}</div>
+ <h2>Perfil sensorial</h2><div class="row">${["bajo","eq","en"].map(k=>`<button class="${D.prof===k?"p":""}" onclick="D.prof='${k}';sv();apply();adult()">${PN[k]}</button>`).join("")}</div>
+ <h2>Volumen</h2><label>Música<input type="range" min="0" max="1" step=".1" value="${D.vm}" oninput="D.vm=+this.value;sv()"></label>
+ <label>Efectos<input type="range" min="0" max="1" step=".1" value="${D.vf}" oninput="D.vf=+this.value;sv();fx.pop()"></label>
+ <div class="row"><button aria-pressed="${D.speak}" onclick="D.speak=!D.speak;sv();adult()">Voz: ${D.speak?"sí":"no"}</button><button aria-pressed="${D.dys}" onclick="D.dys=!D.dys;sv();apply();adult()">Tipografía dislexia: ${D.dys?"sí":"no"}</button></div>
+ <h2>Informe</h2><ul>${rep}</ul><button onclick="if(confirm('¿Borrar todo el progreso?')){try{localStorage.removeItem(K)}catch(e){}location.reload()}">Borrar progreso</button></div>`)}
+
+apply();document.addEventListener("pointerdown",ini,{once:true});home();
+</script></body></html>
